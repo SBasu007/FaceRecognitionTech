@@ -1,7 +1,7 @@
 Flask
-opencv-python
-numpy
+flask-cors
 face_recognition
-supabase
 requests
-dlib==19.22.1  # Adjust version if necessary
+supabase
+pyngrok
+gunicorn
