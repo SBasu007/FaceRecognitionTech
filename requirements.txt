@@ -4,3 +4,4 @@ numpy
 face_recognition
 supabase
 requests
+dlib==19.22.1  # Adjust version if necessary
