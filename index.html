@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+    <script>
+        async function recognizeFace() {
+            const imageUrl = document.getElementById('image-url').value;
+            const response = await fetch('/recognize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image_url: imageUrl })
+            });
+            const matches = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const matchElement = document.createElement('div');
+                    matchElement.innerHTML = `<p>Matched Name: ${match[0]}</p><img src="${match[1]}" alt="${match[0]}" width="200"/>`;
+                    resultsDiv.appendChild(matchElement);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>No matches found.</p>';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Face Recognition</h1>
+    <input type="text" id="image-url" placeholder="Enter Image URL">
+    <button onclick="recognizeFace()">Recognize Face</button>
+    <div id="results"></div>
+</body>
+</html>
